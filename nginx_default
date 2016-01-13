@@ -38,5 +38,5 @@ server {
   }    
 
     auth_basic "Restricted";
-    auth_basic_user_file /htpasswd;
+    auth_basic_user_file /usr/share/elasticsearch/htpasswd;
 }

@@ -18,7 +18,11 @@ ENV JAVA_HOME /jdk1.8.0_66
 ENV PATH ${PATH}:${JAVA_HOME}/bin
 ENV ELASTICSEARCH_USER **None**
 ENV ELASTICSEARCH_PASS **None**
-ENV CLUSTER_NAME ES_Cluster
+ENV CLUSTER_NAME **REQUIRED**
+ENV ES_OPTS ""
+ENV ES_S3_BUCKET_NAME **REQUIRED**
+ENV AWS_ACCESS_KEY_ID **REQUIRED**
+ENV AWS_SECRET_KEY **REQUIRED**
 
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD run.sh /run.sh
@@ -29,14 +33,13 @@ ADD nginx_default /etc/nginx/sites-enabled/default
 ADD config/elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
 
 RUN /usr/share/elasticsearch/bin/plugin install cloud-aws && \    
-    /usr/share/elasticsearch/bin/plugin install discovery-multicast && \
     /usr/share/elasticsearch/bin/plugin install lmenezes/elasticsearch-kopf/v2.1.1 && \
     echo "daemon off;" >> /etc/nginx/nginx.conf && \
     chmod +x /*.sh && \
     chown -R elasticsearch: /usr/share/elasticsearch
 USER elasticsearch
 
-CMD ["/run.sh"]
+CMD ["/run.sh", "${ES_OPTS}"]
 
 # Expose ports.
 #   - 9200: HTTP

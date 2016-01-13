@@ -4,11 +4,20 @@ path:
   plugins: /usr/share/elasticsearch/plugins
   work: /usr/share/elasticsearch/es-work
 network:
-  host: 0.0.0.0
+  host: _[networkInterface]:ipv4_
 discovery:
+  type: ec2
   zen:
     ping:
       multicast:
-        enabled: true
+        enabled: false
+cloud:
+  node:
+    auto_attributes: true
+  aws:
+    region: eu-west
+    s3: ${ES_S3_BUCKET_NAME}
+    access_key: ${AWS_ACCESS_KEY_ID}
+    secret_key: ${AWS_SECRET_KEY}
 cluster:
   name: ${CLUSTER_NAME}
