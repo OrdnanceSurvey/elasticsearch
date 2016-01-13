@@ -10,7 +10,7 @@ RUN apt-get update && \
     apt-get install -y nginx supervisor apache2-utils && \    
     apt-get clean && \
     rm -rf /var/lib/apt/lists && \
-    curl -jksSLH "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u66-b17/jdk-8u66-linux-x64.tar.gz" | gunzip -c - | tar -xf -
+    curl -jksSLH "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u66-b17/jdk-8u66-linux-x64.tar.gz" | tar -xzvf -
 
 ENV JAVA_HOME /jdk1.8.0_66
 ENV PATH ${PATH}:${JAVA_HOME}/bin
