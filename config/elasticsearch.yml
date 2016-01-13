@@ -1,8 +1,8 @@
 path:
-  data: /data/es-data
-  logs: /data/es-log
+  data: /usr/share/elasticsearch/es-data
+  logs: /usr/share/elasticsearch/es-log
   plugins: /usr/share/elasticsearch/plugins
-  work: /data/es-work
+  work: /usr/share/elasticsearch/es-work
 network:
   host: 0.0.0.0
 discovery:

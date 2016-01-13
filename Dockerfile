@@ -25,7 +25,6 @@ ADD run.sh /run.sh
 ADD nginx_default /etc/nginx/sites-enabled/default
 
 # Define mountable directories.
-VOLUME ["/data"]
 # Mount elasticsearch.yml config
 ADD config/elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
 
@@ -34,9 +33,7 @@ RUN /usr/share/elasticsearch/bin/plugin install cloud-aws && \
     /usr/share/elasticsearch/bin/plugin install lmenezes/elasticsearch-kopf/v2.1.1 && \
     echo "daemon off;" >> /etc/nginx/nginx.conf && \
     chmod +x /*.sh && \
-    chown -R elasticsearch: /usr/share/elasticsearch && \
-    chown -R elasticsearch: /data
-
+    chown -R elasticsearch: /usr/share/elasticsearch
 USER elasticsearch
 
 CMD ["/run.sh"]
