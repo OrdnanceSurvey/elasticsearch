@@ -4,7 +4,7 @@ path:
   plugins: /usr/share/elasticsearch/plugins
   work: /usr/share/elasticsearch/es-work
 network:
-  host: _[networkInterface]:ipv4_
+  host: _eth0:ipv4_
 discovery:
   type: ec2
   zen:
