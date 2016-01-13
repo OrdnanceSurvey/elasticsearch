@@ -11,4 +11,4 @@ discovery:
       multicast:
         enabled: true
 cluster:
-  name: ${CLUSTER_NAME}   
+  name: ${CLUSTER_NAME}

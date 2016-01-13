@@ -2,7 +2,7 @@ FROM ubuntu:trusty
 MAINTAINER CSP Support <csp.support@os.uk>
 
 RUN apt-get update && \
-	apt-get install -y curl && \
+	apt-get install -y wget curl && \
 	curl https://packages.elastic.co/GPG-KEY-elasticsearch | apt-key add - && \
     echo 'deb http://packages.elastic.co/elasticsearch/2.x/debian stable main' >> /etc/apt/sources.list && \
     apt-get update && \
@@ -10,7 +10,9 @@ RUN apt-get update && \
     apt-get install -y nginx supervisor apache2-utils && \    
     apt-get clean && \
     rm -rf /var/lib/apt/lists && \
-    curl -jksSLH "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u66-b17/jdk-8u66-linux-x64.tar.gz" | tar -xzvf -
+    wget --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u66-b17/jdk-8u66-linux-x64.tar.gz" -O jdk-8-linux-x64.tar.gz && \
+    tar -xvzf jdk-8-linux-x64.tar.gz && \
+    rm -rf jdk-8-linux-x64.tar.gz
 
 ENV JAVA_HOME /jdk1.8.0_66
 ENV PATH ${PATH}:${JAVA_HOME}/bin
