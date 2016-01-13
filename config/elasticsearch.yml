@@ -1,0 +1,13 @@
+path:
+  data: /data/data
+  logs: /data/log
+  plugins: /data/plugins
+  work: /data/work
+network:
+  host: 0.0.0.0
+discovery:
+  type: ec2
+  zen:
+    ping:
+      multicast:
+        enabled: false
