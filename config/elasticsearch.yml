@@ -1,3 +1,9 @@
+cluster:
+  name: ${CLUSTER_NAME}
+node:
+  name: ${ELASTICSEARCH_NODE_NAME}
+  master: true
+  data: true
 path:
   data: /usr/share/elasticsearch/es-data
   logs: /usr/share/elasticsearch/es-log
@@ -11,13 +17,19 @@ discovery:
     ping:
       multicast:
         enabled: false
+  ec2:
+    tag:
+      name: ${EC2_NODE_NAME}        
 cloud:
   node:
     auto_attributes: true
   aws:
-    region: eu-west
+    region: eu-west-1
     s3: ${ES_S3_BUCKET_NAME}
     access_key: ${AWS_ACCESS_KEY_ID}
     secret_key: ${AWS_SECRET_KEY}
-cluster:
-  name: ${CLUSTER_NAME}
+index:
+  number_of_shards: 2
+  number_of_replicas: 1
+bootstrap:
+  mlockall: true

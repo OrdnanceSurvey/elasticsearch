@@ -23,6 +23,8 @@ ENV ES_OPTS ""
 ENV ES_S3_BUCKET_NAME **REQUIRED**
 ENV AWS_ACCESS_KEY_ID **REQUIRED**
 ENV AWS_SECRET_KEY **REQUIRED**
+ENV EC2_NODE_NAME **REQUIRED**
+ENV ELASTICSEARCH_NODE_NAME ${TUTUM_CONTAINER_HOSTNAME}
 
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD run.sh /run.sh
@@ -44,7 +46,5 @@ CMD ["/run.sh", "${ES_OPTS}"]
 # Expose ports.
 #   - 9200: HTTP
 #   - 9300: transport
-#   - 54328: discovery
 EXPOSE 9200
 EXPOSE 9300
-EXPOSE 54328
