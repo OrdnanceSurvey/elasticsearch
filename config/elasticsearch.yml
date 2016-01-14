@@ -10,7 +10,7 @@ path:
   plugins: /usr/share/elasticsearch/plugins
   work: /usr/share/elasticsearch/es-work
 network:
-  host: _eth0:ipv4_
+  host: ${NETWORK_BIND_HOST}
 discovery:
   type: ec2
   zen:
