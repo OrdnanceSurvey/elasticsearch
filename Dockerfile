@@ -27,6 +27,7 @@ ENV EC2_NODE_NAME **REQUIRED**
 ENV ES_HOSTS **REQUIRED**
 ENV ELASTICSEARCH_NODE_NAME ${TUTUM_CONTAINER_HOSTNAME}
 ENV NETWORK_BIND_HOST 0.0.0.0
+ENV NETWORK_PUBLISH_HOST _ec2:privateIp_
 
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD run.sh /run.sh

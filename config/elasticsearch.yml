@@ -10,15 +10,13 @@ path:
   work: /usr/share/elasticsearch/es-work
 network:
   host: ${NETWORK_BIND_HOST}
-  publish_host: ${ELASTICSEARCH_NODE_NAME}
+  publish_host: ${NETWORK_PUBLISH_HOST}
 discovery:
   type: ec2
   zen:
     ping:
       multicast:
         enabled: false
-      unicast:
-        hosts: ${ES_HOSTS}        
   ec2:
     tag:
       Name: ${EC2_NODE_NAME}  
@@ -29,9 +27,15 @@ cloud:
     auto_attributes: true
   aws:
     region: eu-west-1
-    s3: ${ES_S3_BUCKET_NAME}
     access_key: ${AWS_ACCESS_KEY_ID}
     secret_key: ${AWS_SECRET_KEY}
+gateway:
+  type: s3
+  s3:
+    bucket: ${ES_S3_BUCKET_NAME}
+  recover_after_nodes: 1
+  recover_after_time: 1m
+  expected_nodes: 3     
 index:
   number_of_shards: 2
   number_of_replicas: 1
