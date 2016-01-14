@@ -2,7 +2,6 @@ cluster:
   name: ${CLUSTER_NAME}
 node:
   name: ${ELASTICSEARCH_NODE_NAME}
-  master: true
   data: true
 path:
   data: /usr/share/elasticsearch/es-data
@@ -11,15 +10,20 @@ path:
   work: /usr/share/elasticsearch/es-work
 network:
   host: ${NETWORK_BIND_HOST}
+  publish_host: ${ELASTICSEARCH_NODE_NAME}
 discovery:
   type: ec2
   zen:
     ping:
       multicast:
         enabled: false
+      unicast:
+        hosts: ${ES_HOSTS}        
   ec2:
     tag:
-      name: ${EC2_NODE_NAME}        
+      Name: ${EC2_NODE_NAME}  
+plugin:
+  mandatory: cloud-aws
 cloud:
   node:
     auto_attributes: true
